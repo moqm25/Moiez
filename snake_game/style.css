@@ -1,0 +1,57 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Body Styling */
+  body {
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(45deg, #4facfe, #00f2fe);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+  
+  /* Game Container */
+  #game-container {
+    text-align: center;
+  }
+  
+  /* Canvas Styling */
+  canvas {
+    background: #fff;
+    border: 2px solid #333;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    margin-bottom: 10px;
+  }
+  
+  /* Heading */
+  h1 {
+    color: #fff;
+    margin-bottom: 20px;
+  }
+  
+  /* Score Display */
+  #score {
+    font-size: 1.2em;
+    color: #fff;
+    margin-bottom: 10px;
+  }
+  
+  /* Restart Button */
+  #restartButton {
+    padding: 10px 20px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  #restartButton:hover {
+    background-color: #555;
+  }

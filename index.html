@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+  />
+  <!-- favicon -->
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
+  <meta name="description" content="Moiez Qamar - Ultimate Fun Website" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+  <title>Moiez Qamar | Ultimate Fun Website</title>
+
+  <!-- ======= FONTS ======= -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- ======= CSS ======= -->
+  <link rel="stylesheet" href="css/styles.css" />
+
+  <!-- ======= LIBRARIES ======= -->
+  <!-- Typed.js for animated typing text -->
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+  <!-- Confetti library -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+  <!-- Vanilla Tilt for 3D tilt -->
+  <script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.8.0/dist/vanilla-tilt.min.js"></script>
+  <!-- tsparticles for background particles/fireflies -->
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.9.3/tsparticles.bundle.min.js"></script>
+</head>
+<body>
+  <!-- ====== SCROLL PROGRESS BAR ====== -->
+  <div id="scroll-progress"></div>
+
+  <!-- ====== CUSTOM CURSOR ====== -->
+  <div id="custom-cursor"></div>
+
+  <!-- ====== FIREFLIES / PARTICLES CONTAINER ====== -->
+  <div id="tsparticles"></div>
+
+  <!-- ====== MULTI-STEP ONBOARDING ====== -->
+  <!-- <div id="onboarding-modal" class="onboarding-hidden">
+    <div class="onboarding-content">
+      <h2>Welcome to My Site!</h2>
+      <p id="onboarding-text">
+        Step 1: Enjoy the color, animations, and discover hidden fun. Click Next to continue...
+      </p>
+      <button id="onboarding-next-btn" class="btn-fun">Next</button>
+      <button id="onboarding-close-btn" class="btn-fun">Close</button>
+    </div>
+  </div> -->
+
+  <!-- ====== AUDIO (BACKGROUND MUSIC) ====== -->
+  <!-- <audio id="bg-music" src="images/background-music.mp3" loop></audio> -->
+
+  <!-- ====== SEASONAL OVERLAY ====== -->
+  <div id="season-overlay" class="season-hidden"></div>
+
+  <!-- ======= NAVBAR ======= -->
+  <nav class="navbar">
+    <div class="logo glitch" data-text="Moiez Qamar">Moiez Qamar</div>
+    <ul class="nav-links">
+      <li><a href="#home" class="active link-fun">Home</a></li>
+      <li><a href="#about" class="link-fun">About</a></li>
+      <li><a href="#experience" class="link-fun">Experience</a></li>
+      <li><a href="#education" class="link-fun">Education</a></li>
+      <li><a href="#contact" class="link-fun">Contact</a></li>
+      <li><a href="./snake_game/index.html" class="link-fun">Snake Game</a></li>
+    </ul>
+    <div class="nav-toggle" id="mobile-nav-toggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <!-- Theme Switcher -->
+    <button id="theme-toggle" class="theme-switch-btn">Theme</button>
+    <!-- Background Music Toggle -->
+    <!-- <button id="music-toggle" class="theme-switch-btn">Music</button> -->
+    <!-- Seasonal Overlay Toggle -->
+    <!-- <button id="season-toggle" class="theme-switch-btn">Season</button> -->
+  </nav>
+
+  <!-- ======= PARALLAX SECTION #1 (HERO) ======= -->
+  <header id="home" class="hero-section parallax-section"
+    style="background-image: url('images/parallax1.jpg');">
+    <!-- Blob / Animated Gradient BG (Optional) -->
+    <div class="hero-blob-bg"></div>
+
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1>
+        Hello, I'm <span id="typed-hero"></span>
+      </h1>
+      <p>Your friendly Network Automation Engineer & Teacher</p>
+      <button id="confettiBtn" class="btn-fun">Celebrate!</button>
+    </div>
+    <!-- Floating shape(s) in hero -->
+    <div class="floating-shape shape-1"></div>
+    <div class="floating-shape shape-2"></div>
+  </header>
+
+  <!-- ======= ABOUT SECTION ======= -->
+  <section id="about" class="about-section section reveal">
+    <h2>About Me</h2>
+    <div class="about-content tilt-card" data-tilt>
+      <div class="about-image">
+        <img src="images/profile.jpg" alt="Moiez Qamar profile photo" />
+      </div>
+      <div class="about-text">
+        <p>
+          My name is <strong>Moiez Qamar</strong>. I live in Princeton, NJ.
+          I work as a Network Automation Engineer at UPS, and I teach
+          Islamic, Quranic, and Arabic Studies at the ISCJ Weekend School.
+        </p>
+        <p>
+          I love playing soccer, basketball, and coding random stuff.
+          I'm also a big fan of the outdoors, where I find peace and inspiration.
+        </p>
+        <p id="random-quote" class="quote-box"></p>
+      </div>
+    </div>
+
+    <!-- Interactive Terminal -->
+    <div class="terminal-section reveal tilt-card" data-tilt>
+      <h3>Type a command (e.g., "help", "about"): </h3>
+      <div class="terminal-display" id="terminal-display"></div>
+      <input type="text" id="terminal-input" placeholder="Type here..." />
+    </div>
+  </section>
+
+  <!-- ======= PARALLAX SECTION #2 ======= -->
+  <section class="parallax-section parallax-mid"
+    style="background-image: url('images/parallax2.jpg');">
+    <div class="parallax-overlay">
+      <h2>Enjoy the Journey</h2>
+      <p>Parallax depth to keep things interesting!</p>
+    </div>
+    <!-- Another floating shape -->
+    <div class="floating-shape shape-3"></div>
+  </section>
+
+  <!-- ======= EXPERIENCE SECTION ======= -->
+  <section id="experience" class="experience-section section reveal">
+    <h2>Experience</h2>
+    <div class="experience-wrapper">
+      <div class="experience-item tilt-card" data-tilt>
+        <h3>Network Automation Engineer Co-op</h3>
+        <span class="org">UPS</span>
+        <span class="duration">Present</span>
+        <p>
+          Building automated workflows, optimizing network configurations, and
+          implementing robust, scalable solutions.
+        </p>
+      </div>
+      <div class="experience-item tilt-card" data-tilt>
+        <h3>Teacher</h3>
+        <span class="org">ISCJ Weekend School</span>
+        <span class="duration">Present</span>
+        <p>
+          Teaching Islamic Studies, Quranic Studies, and Arabic to various grades,
+          encouraging students to learn through creative methods.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= EDUCATION SECTION ======= -->
+  <section id="education" class="education-section section reveal">
+    <h2>Education</h2>
+    <div class="education-wrapper">
+      <div class="education-item tilt-card" data-tilt>
+        <img src="images/logo-rvcc.png" alt="RVCC Logo" class="school-logo" />
+        <h3>A.S. in Science/Mathematics</h3>
+        <span class="school">Raritan Valley Community College</span>
+        <span class="duration">2021</span>
+      </div>
+      <div class="education-item tilt-card" data-tilt>
+        <img src="images/logo-njit.png" alt="NJIT Logo" class="school-logo" />
+        <h3>B.S. in Computer &amp; B.S. in Data Science</h3>
+        <span class="school">NJIT</span>
+        <span class="duration">2024</span>
+      </div>
+      <div class="education-item tilt-card" data-tilt>
+        <img src="images/logo-gatech.png" alt="Georgia Tech Logo" class="school-logo" />
+        <h3>M.S. in Computational Data Analytics (in progress)</h3>
+        <span class="school">Georgia Institute of Technology</span>
+      </div>
+      <div class="education-item tilt-card" data-tilt>
+        <img src="images/logo-harvard.png" alt="Harvard Logo" class="school-logo" />
+        <h3>M.S. in Data Science (in progress)</h3>
+        <span class="school">Harvard University</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= PARALLAX SECTION #3 ======= -->
+  <section class="parallax-section parallax-mid"
+    style="background-image: url('images/parallax1.jpg');">
+    <div class="parallax-overlay">
+      <h2>Keep Scrolling</h2>
+      <p>More parallax in action!</p>
+    </div>
+  </section>
+
+  <!-- ======= CONTACT SECTION ======= -->
+  <section id="contact" class="contact-section section reveal">
+    <h2>Contact</h2>
+    <p>Let's connect and make great things happen!</p>
+    <p>
+      <strong>Email:</strong>
+      <a href="mailto:moiezqamar@gmail.com">moiezqamar@gmail.com</a>
+    </p>
+    <p><strong>Location:</strong> Princeton, NJ</p>
+    <div class="social-links">
+      <a href="https://www.linkedin.com/in/moiezq/" class="btn-fun" target="_blank">LinkedIn</a>
+      <a href="https://github.com" class="btn-fun" target="_blank">GitHub</a>
+      <!-- <a href="https://twitter.com" class="btn-fun" target="_blank">Twitter</a> -->
+    </div>
+    <br />
+    <!-- Interactive Doodle Canvas -->
+    <h3>Draw Something!</h3>
+    <canvas id="doodle-canvas" width="300" height="200"></canvas>
+    <br />
+    <button id="clear-canvas" class="btn-fun">Clear Canvas</button>
+  </section>
+
+  <!-- ======= FOOTER ======= -->
+  <footer class="footer">
+    <p>
+      &copy; <span id="year"></span> Moiez Qamar. Built with 
+      <span class="heart">♥</span> and infinite creativity.
+    </p>
+  </footer>
+
+  <!-- ======= MAIN JS ======= -->
+  <script src="js/script.js" defer></script>
+</body>
+</html>
