@@ -1,5 +1,5 @@
 // Replace with your actual Heroku app URL
-const API_BASE_URL = 'http://localhost:3000';
+const API_BASE_URL = 'https://snake-game-moiez-896fcd7705d3.herokuapp.com';
 
 // Get references to DOM elements
 const nameContainer = document.getElementById('name-container');
