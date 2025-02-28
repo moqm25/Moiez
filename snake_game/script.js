@@ -11,7 +11,6 @@ const ctx = canvas.getContext('2d');
 const scoreDiv = document.getElementById('score');
 const restartButton = document.getElementById('restartButton');
 const leaderboardBody = document.getElementById('leaderboard-body');
-const downloadCSVButton = document.getElementById('downloadCSV');
 
 let playerName = '';
 
@@ -169,28 +168,6 @@ function updateLeaderboardTable() {
     });
 }
 
-// Download leaderboard data as CSV
-downloadCSVButton.addEventListener('click', () => {
-  fetch(API_BASE_URL + '/leaderboard')
-    .then(response => response.json())
-    .then(data => {
-      let csvContent = "Name,Score\n";
-      data.forEach(entry => {
-        csvContent += `${entry.name},${entry.score}\n`;
-      });
-      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = "leaderboard.csv";
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-    })
-    .catch(error => {
-      console.error('Error downloading CSV:', error);
-    });
-});
 
 // Listen for arrow key presses to control the snake
 document.addEventListener('keydown', event => {
