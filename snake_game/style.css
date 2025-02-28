@@ -15,6 +15,7 @@ body {
   justify-content: center;
   min-height: 100vh;
   color: #fff;
+  padding: 10px;
 }
 
 /* Name Input Section */
@@ -97,20 +98,4 @@ canvas {
   border: 1px solid #fff;
   padding: 8px;
   text-align: center;
-}
-
-/* Download CSV Button */
-#downloadCSV {
-  margin-top: 10px;
-  padding: 5px 10px;
-  background-color: #333;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-#downloadCSV:hover {
-  background-color: #555;
 }
