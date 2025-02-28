@@ -2,9 +2,9 @@
 	"name": "tailwind",
 	"version": "1.0.0",
 	"description": "",
-	"main": "server.js",
+	"main": "game.js",
 	"scripts": {
-		"run": "node server.js",
+		"run": "node game.js",
 		"heroku-postbuild": "mkdir ./.cache && mv /app/.cache/puppeteer ./.cache"
 	},
 	"keywords": [],
