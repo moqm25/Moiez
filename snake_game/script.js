@@ -1,8 +1,19 @@
-// Get references to the canvas and its context, plus other DOM elements.
+// Replace with your actual Heroku app URL
+const API_BASE_URL = 'http://localhost:3000';
+
+// Get references to DOM elements
+const nameContainer = document.getElementById('name-container');
+const playerNameInput = document.getElementById('playerName');
+const saveNameButton = document.getElementById('saveName');
+const gameContainer = document.getElementById('game-container');
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 const scoreDiv = document.getElementById('score');
 const restartButton = document.getElementById('restartButton');
+const leaderboardBody = document.getElementById('leaderboard-body');
+const downloadCSVButton = document.getElementById('downloadCSV');
+
+let playerName = '';
 
 // Game settings
 const canvasSize = 400;
@@ -16,7 +27,21 @@ let score = 0;
 let gameInterval;
 const speed = 150; // game speed in milliseconds
 
-// Initialize the game state
+// Save player name and display the game container
+saveNameButton.addEventListener('click', () => {
+  const enteredName = playerNameInput.value.trim();
+  if (enteredName) {
+    playerName = enteredName;
+    nameContainer.style.display = 'none';
+    gameContainer.style.display = 'block';
+    init();
+    updateLeaderboardTable(); // load leaderboard from server
+  } else {
+    alert("Please enter a valid name.");
+  }
+});
+
+// Initialize game state
 function init() {
   snake = [{ x: 10, y: 10 }];
   direction = { x: 1, y: 0 };
@@ -30,9 +55,7 @@ function init() {
 
 // Main game loop
 function gameLoop() {
-  // Update direction based on latest key input
   direction = nextDirection;
-  // Calculate new head position
   const head = { x: snake[0].x + direction.x, y: snake[0].y + direction.y };
 
   // Check collision with walls or self
@@ -41,7 +64,6 @@ function gameLoop() {
     return;
   }
 
-  // Add new head to the snake
   snake.unshift(head);
 
   // Check if the snake has eaten the fruit
@@ -50,17 +72,14 @@ function gameLoop() {
     updateScore();
     placeFruit();
   } else {
-    // Remove the tail cell
     snake.pop();
   }
 
-  // Redraw the game state
   draw();
 }
 
-// Draw the game elements
+// Draw game elements
 function draw() {
-  // Clear canvas
   ctx.fillStyle = '#fff';
   ctx.fillRect(0, 0, canvasSize, canvasSize);
 
@@ -68,7 +87,7 @@ function draw() {
   ctx.fillStyle = '#e74c3c';
   ctx.fillRect(fruit.x * cellSize, fruit.y * cellSize, cellSize, cellSize);
 
-  // Draw snake with a pleasant visual style
+  // Draw snake
   ctx.fillStyle = '#2ecc71';
   snake.forEach(cell => {
     ctx.fillRect(cell.x * cellSize, cell.y * cellSize, cellSize, cellSize);
@@ -77,17 +96,16 @@ function draw() {
   });
 }
 
-// Randomly place the fruit on the grid, ensuring it doesn't land on the snake
+// Place fruit in a random location, avoiding the snake
 function placeFruit() {
   fruit.x = Math.floor(Math.random() * cellCount);
   fruit.y = Math.floor(Math.random() * cellCount);
-
   if (snake.some(cell => cell.x === fruit.x && cell.y === fruit.y)) {
     placeFruit();
   }
 }
 
-// Check if the head collides with any cell of the snake
+// Check collision of snake head with its body
 function checkCollision(head, snakeArray) {
   return snakeArray.some(cell => head.x === cell.x && head.y === cell.y);
 }
@@ -97,14 +115,85 @@ function updateScore() {
   scoreDiv.innerText = 'Score: ' + score;
 }
 
-// Handle game over scenario
+// Game over function
 function gameOver() {
   clearInterval(gameInterval);
   alert('Game Over! Your score: ' + score);
+  // Ask if the player wants to add their score to the leaderboard
+  if (confirm("Do you want to add your score to the leaderboard?")) {
+    addScoreToLeaderboard(playerName, score);
+  }
 }
 
-// Listen for key presses to control the snake
-document.addEventListener('keydown', function (event) {
+// Send a POST request to add a new score to the leaderboard
+function addScoreToLeaderboard(name, score) {
+  fetch(API_BASE_URL + '/leaderboard', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ name, score })
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log(data);
+    updateLeaderboardTable();
+  })
+  .catch(error => {
+    console.error('Error adding score:', error);
+  });
+}
+
+// Fetch leaderboard data from the server and update the table
+function updateLeaderboardTable() {
+  fetch(API_BASE_URL + '/leaderboard')
+    .then(response => response.json())
+    .then(data => {
+      // Sort by score descending and take the top 10 entries
+      data.sort((a, b) => b.score - a.score);
+      const top10 = data.slice(0, 10);
+      leaderboardBody.innerHTML = '';
+      top10.forEach(entry => {
+        const row = document.createElement('tr');
+        const nameCell = document.createElement('td');
+        nameCell.textContent = entry.name;
+        const scoreCell = document.createElement('td');
+        scoreCell.textContent = entry.score;
+        row.appendChild(nameCell);
+        row.appendChild(scoreCell);
+        leaderboardBody.appendChild(row);
+      });
+    })
+    .catch(error => {
+      console.error('Error fetching leaderboard:', error);
+    });
+}
+
+// Download leaderboard data as CSV
+downloadCSVButton.addEventListener('click', () => {
+  fetch(API_BASE_URL + '/leaderboard')
+    .then(response => response.json())
+    .then(data => {
+      let csvContent = "Name,Score\n";
+      data.forEach(entry => {
+        csvContent += `${entry.name},${entry.score}\n`;
+      });
+      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = "leaderboard.csv";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    })
+    .catch(error => {
+      console.error('Error downloading CSV:', error);
+    });
+});
+
+// Listen for arrow key presses to control the snake
+document.addEventListener('keydown', event => {
   switch (event.key) {
     case 'ArrowUp':
       if (direction.y === 0) nextDirection = { x: 0, y: -1 };
@@ -121,8 +210,5 @@ document.addEventListener('keydown', function (event) {
   }
 });
 
-// Restart button listener to restart the game
+// Restart button event
 restartButton.addEventListener('click', init);
-
-// Start the game when the page loads
-init();

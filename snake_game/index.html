@@ -1,18 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Snake Game</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Snake Game with Leaderboard</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div id="game-container">
+  <!-- Name Input Section -->
+  <div id="name-container">
+    <label for="playerName">Enter your name:</label>
+    <input type="text" id="playerName" placeholder="Your name" />
+    <button id="saveName">Save Name</button>
+  </div>
+
+  <!-- Game Container -->
+  <div id="game-container" style="display: none;">
     <h1>Snake Game</h1>
     <canvas id="gameCanvas" width="400" height="400"></canvas>
     <div id="score">Score: 0</div>
     <button id="restartButton">Restart</button>
   </div>
+
+  <!-- Leaderboard Container -->
+  <div id="leaderboard-container">
+    <h2>Leaderboard</h2>
+    <table id="leaderboard-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Score</th>
+        </tr>
+      </thead>
+      <tbody id="leaderboard-body">
+        <!-- Top scores will appear here -->
+      </tbody>
+    </table>
+    <!-- <button id="downloadCSV">Download CSV</button> -->
+  </div>
+
   <script src="script.js"></script>
 </body>
 </html>

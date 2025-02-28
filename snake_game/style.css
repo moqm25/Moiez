@@ -1,57 +1,116 @@
 /* Reset */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  /* Body Styling */
-  body {
-    font-family: 'Roboto', sans-serif;
-    background: linear-gradient(45deg, #4facfe, #00f2fe);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-  }
-  
-  /* Game Container */
-  #game-container {
-    text-align: center;
-  }
-  
-  /* Canvas Styling */
-  canvas {
-    background: #fff;
-    border: 2px solid #333;
-    box-shadow: 0 0 10px rgba(0,0,0,0.2);
-    margin-bottom: 10px;
-  }
-  
-  /* Heading */
-  h1 {
-    color: #fff;
-    margin-bottom: 20px;
-  }
-  
-  /* Score Display */
-  #score {
-    font-size: 1.2em;
-    color: #fff;
-    margin-bottom: 10px;
-  }
-  
-  /* Restart Button */
-  #restartButton {
-    padding: 10px 20px;
-    background-color: #333;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  #restartButton:hover {
-    background-color: #555;
-  }
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body Styling */
+body {
+  font-family: 'Roboto', sans-serif;
+  background: linear-gradient(45deg, #4facfe, #00f2fe);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  color: #fff;
+}
+
+/* Name Input Section */
+#name-container {
+  margin: 20px;
+  text-align: center;
+}
+
+#name-container input {
+  padding: 8px;
+  font-size: 1em;
+  margin-right: 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+#name-container button {
+  padding: 8px 12px;
+  font-size: 1em;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#name-container button:hover {
+  background-color: #555;
+}
+
+/* Game Container */
+#game-container {
+  text-align: center;
+  margin: 20px;
+}
+
+canvas {
+  background: #fff;
+  border: 2px solid #333;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  margin-bottom: 10px;
+}
+
+/* Score Display */
+#score {
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+
+/* Restart Button */
+#restartButton {
+  padding: 10px 20px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#restartButton:hover {
+  background-color: #555;
+}
+
+/* Leaderboard Container */
+#leaderboard-container {
+  text-align: center;
+  margin: 20px;
+}
+
+/* Leaderboard Table */
+#leaderboard-table {
+  margin: 0 auto;
+  border-collapse: collapse;
+  width: 300px;
+}
+
+#leaderboard-table th,
+#leaderboard-table td {
+  border: 1px solid #fff;
+  padding: 8px;
+  text-align: center;
+}
+
+/* Download CSV Button */
+#downloadCSV {
+  margin-top: 10px;
+  padding: 5px 10px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#downloadCSV:hover {
+  background-color: #555;
+}
